@@ -1,0 +1,8 @@
+create react app
+pull from database
+display contents of json file
+receive deny or accept
+send to database result in json file
+allow for email notifications
+
+look at local friend app for ideas on what the info will be
