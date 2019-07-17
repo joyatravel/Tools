@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Tool.css";
 import test from "./test.json";
 import { Button, Row, Title, Profile } from "./tools.components";
-
+let json = "";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -11,12 +11,23 @@ class App extends Component {
       accepted: false
     };
   }
+  handleClick = value => () => {
+    this.setState(
+      {
+        accepted: value
+      },
+      () => {
+        json = JSON.stringify(this.state);
+        alert(json);
+      }
+    );
+  };
 
   render() {
     return (
       <div className="App">
         <header className="App-header" style={{ alignItems: "left" }}>
-          <div style={{ width: 700, margin: "auto" }}>
+          <div style={{ width: 750, margin: "auto" }}>
             <div
               style={{
                 display: "flex",
@@ -39,14 +50,19 @@ class App extends Component {
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  alignItems: "center"
+                  alignItems: "center",
+                  paddingLeft: "10px"
                 }}
               >
                 <Title style={{ padding: "0 0 10px 0" }}>ID</Title>
                 <Profile
                   src={this.info.IDPic}
                   alt={":("}
-                  style={{ borderRadius: "15px" }}
+                  style={{
+                    borderRadius: "10px",
+                    width: "400px",
+                    height: "250px"
+                  }}
                 />
               </div>
             </div>
@@ -105,14 +121,18 @@ class App extends Component {
             </Row>
             <div style={{ display: "flex" }}>
               <Button
-                onClick={() => this.setState({ accepted: true })}
-                style={{ background: this.state.accepted ? "tomato" : "white" }}
+                onClick={this.handleClick(true)}
+                style={{
+                  background: this.state.accepted ? "tomato" : "white"
+                }}
               >
                 Accept
               </Button>
               <Button
-                onClick={() => this.setState({ accepted: false })}
-                style={{ background: this.state.accepted ? "white" : "tomato" }}
+                onClick={this.handleClick(false)}
+                style={{
+                  background: this.state.accepted ? "white" : "tomato"
+                }}
               >
                 Deny
               </Button>
@@ -124,3 +144,4 @@ class App extends Component {
   }
 }
 export default App;
+export { json };
